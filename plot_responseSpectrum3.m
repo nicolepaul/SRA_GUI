@@ -6,7 +6,7 @@ neq = size(NDAT,1);
 
 % Figure, axes, line properties
 defaultFigureProperties;
-plotline = {'r','g','b','m','c','y'};
+plotline = {'m--','r','g','b','m','c','y'};
 bval = 0.8;
 gval = 0.1;
 rval = linspace(0.2, 1, neq);
@@ -63,7 +63,7 @@ for i = 1:neq
             subplot(p(1), p(2), j);
             legendstr = cell(1, 1);
             for k = 3:ncase
-                plot(T_range, convf(1)*squeeze(RSx(:,ncase*j-(ncase-k),i)), plotline{k}, 'LineWidth', 1.5);
+                plot(T_range, convf(1)*squeeze( sqrt(RSx(:,ncase*j-(ncase-k),i).*RSx(:,ncase*j-(ncase-k),i))     ), plotline{k}, 'LineWidth', 1.5);
                 grid on; hold on;
                 xlabel('Period [s]'); ylabel(strcat('Pseudo-spectral Acceleration [',unitstr(1),']'));
                 title(strcat(eqname{i},':  ',NDAT{i,j*ncase}.profile,'  -  ',str,', X'));
@@ -72,22 +72,22 @@ for i = 1:neq
             legend(legendstr,'Location','NorthEast');
             hold off;
         end
-        
-        % Y-Direction
-        figure;
-        for j = 1:nprofile
-            subplot(p(1), p(2), j);
-            legendstr = cell(1, 1);
-            for k = 3:ncase
-                plot(T_range, convf(1)*squeeze(RSy(:,ncase*j-(ncase-k),i)), plotline{k}, 'LineWidth', 1.5);
-                grid on; hold on;
-                xlabel('Period [s]'); ylabel(strcat('Pseudo-spectral Acceleration [',unitstr(1),']'));
-                title(strcat(eqname{i},':  ',NDAT{i,j*ncase}.profile,'  -  ',str,', Y'));
-                legendstr{k-2} = NDAT{i,ncase*j-(ncase-k)}.case;
-            end
-            legend(legendstr,'Location','NorthEast');
-            hold off;
-        end
+% %         
+% %         Y-Direction
+% %         figure;
+% %         for j = 1:nprofile
+% %             subplot(p(1), p(2), j);
+% %             legendstr = cell(1, 1);
+% %             for k = 3:ncase
+% %                 plot(T_range, convf(1)*squeeze(RSy(:,ncase*j-(ncase-k),i)), plotline{k}, 'LineWidth', 1.5);
+% %                 grid on; hold on;
+% %                 xlabel('Period [s]'); ylabel(strcat('Pseudo-spectral Acceleration [',unitstr(1),']'));
+% %                 title(strcat(eqname{i},':  ',NDAT{i,j*ncase}.profile,'  -  ',str,', Y'));
+% %                 legendstr{k-2} = NDAT{i,ncase*j-(ncase-k)}.case;
+% %             end
+% %             legend(legendstr,'Location','NorthEast');
+% %             hold off;
+% %         end
         
     elseif rsno == 2 || rsno == 3 % TEMP - No outcrop yet
         % X-Direction
