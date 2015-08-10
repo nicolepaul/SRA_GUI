@@ -2,9 +2,13 @@ function [NDAT, SDAT, nprofile, ncase] = processData(directorystr)
 
 % Creating list of folders and files
 FileList = dir(directorystr);
+
+FileList = FileList(arrayfun(@(x) x.name(1), FileList) ~= '.');
 N = size(FileList, 1);
-nfolders = N - 2;
-FileList = FileList(3:end);
+nfolders = N;
+% N = size(FileList, 1);
+% nfolders = N - 2;
+% FileList = FileList(3:end);
 
 % Accessing first folder of interest
 foldername = fullfile(directorystr, FileList(1).name);
@@ -34,8 +38,8 @@ SDAT = cell(nfolders, num_sset);
 for i = 1:nfolders
     % Prelim
     foldername = fullfile(directorystr, FileList(i).name);
-
-    % Extract node set data 
+    
+    % Extract node set data
     for j = 1:num_nset
         data = csvread(fullfile(foldername,strcat('Nodes_',names_nset{j},'.csv')), 0,2)';
         inds_nid = find(not(cellfun('isempty',strfind(node_dat{2},names_nset{j}))));
@@ -54,7 +58,7 @@ for i = 1:nfolders
         NDAT{i,j}.profile = tok;
         NDAT{i,j}.case = rem(2:end);
     end
-    % Extract solid set data 
+    % Extract solid set data
     for j = 1:num_sset
         data = csvread(fullfile(foldername,strcat('Solids_',names_sset{j},'.csv')), 0,2)';
         inds_sid = find(not(cellfun('isempty',strfind(solid_dat{2},names_sset{j}))));
@@ -77,6 +81,6 @@ end
 clearvars -except directorystr NDAT SDAT nprofile ncase;
 
 % Saving data structures to directory
-save(fullfile(directorystr,'PROCESSED_DATA.mat'),'-v7.3'), 
+save(fullfile(directorystr,'PROCESSED_DATA.mat'),'-v7.3'),
 
 end

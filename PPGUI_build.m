@@ -22,7 +22,7 @@ fig_hdl = handles.figure1;
         
         set(0,'defaultFigureColor',[1 1 1]);
         set(0,'DefaultAxesFontSize',8)
-        set(0, 'DefaultTextColor', [0, 0, 0]);
+        set(0,'DefaultTextColor', [0, 0, 0]);
         
         % Get size of screen in pixels
         set(0,'units','pixels')
@@ -1337,7 +1337,7 @@ fig_hdl = handles.figure1;
         
         % TH1
         if get(handles.thdata1,'Value')
-            plot_timeHistory(NDAT, 'ax', 'ay', eqname, 'Surface Acceleration', 1, convf, unitstr, 1, nprofile, ncase);
+            plot_timeHistory2(NDAT, 'ax', 'ay', eqname, 'Surface Acceleration', 1, convf, unitstr, 1, nprofile, ncase);
         end
         
         % TH 2
@@ -1379,24 +1379,24 @@ fig_hdl = handles.figure1;
         
         % RS 1
         if get(handles.rsdata1,'Value')
-            plot_responseSpectrum(NDAT, E, unitstr, convf, eqname,'Surface Response Spectrum', 1, nprofile, ncase, rs_bool);
+            plot_responseSpectrum3(NDAT, E, unitstr, convf, eqname,'Surface Response Spectrum', 1, nprofile, ncase, rs_bool);
         end
         
         
         % RS 2
         if get(handles.rsdata2,'Value')
-            plot_responseSpectrum(NDAT, E, unitstr, convf, eqname,'Bedrock (Infield) Response Spectrum', 2, nprofile, ncase, rs_bool);
+            plot_responseSpectrum3(NDAT, E, unitstr, convf, eqname,'Bedrock (Infield) Response Spectrum', 2, nprofile, ncase, rs_bool);
         end
         
         
         % RS 3
         if get(handles.rsdata3,'Value') % TEMP - No outcrop yet
-            plot_responseSpectrum(NDAT, E, unitstr, convf, eqname,'Bedrock (Infield) Response Spectrum', 3, nprofile, ncase, rs_bool);
+            plot_responseSpectrum3(NDAT, E, unitstr, convf, eqname,'Bedrock (Infield) Response Spectrum', 3, nprofile, ncase, rs_bool);
         end
         
         % RS 4
         if get(handles.rsdata4,'Value')
-            plot_responseSpectrum(NDAT, E, unitstr, convf, eqname,'Spectral Amplification', 4, nprofile, ncase, rs_bool);
+            plot_responseSpectrum3(NDAT, E, unitstr, convf, eqname,'Spectral Amplification', 4, nprofile, ncase, rs_bool);
         end
         
         
@@ -1412,7 +1412,7 @@ fig_hdl = handles.figure1;
         
         % PP 1
         if get(handles.ppdata1, 'Value')
-            plot_peakProfile(SDAT, 'epsyz', 'epszx', eqname, 'Max Shear Strain', 5, convf, unitstr, nprofile, ncase, pp_bool)
+            plot_peakProfile3(SDAT, 'epsyz', 'epszx', eqname, 'Max Shear Strain', 5, convf, unitstr, nprofile, ncase, pp_bool)
         end
         
         
