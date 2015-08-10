@@ -101,10 +101,10 @@ elseif rsno == 2 || rsno == 3
             end
             
             
-                RSmean = mean(RS_geomean(:, ncase*j-(ncase-k), :), 3);
+                RSmean = mean(RSgeomean(:, ncase*j-(ncase-k), :), 3);
                 plot(T_range, squeeze(RSmean), 'k-', 'LineWidth', 2, 'DisplayName', 'Mean');
 
-                RSmax = max(RS_geomean(:, ncase*j-(ncase-k), :), [], 3);
+                RSmax = max(RSgeomean(:, ncase*j-(ncase-k), :), [], 3);
                 plot(T_range, squeeze(RSmax), 'r--', 'LineWidth', 2, 'DisplayName', 'Max');
             
 
@@ -121,7 +121,7 @@ elseif rsno == 4
 %                 legendstr = cell(neq, 1);
                 for i = 1:neq
                     % X-Direction
-                    plot(T_range, convf(1)*squeeze(RSgeomean(:,ncase*j-(ncase-k),i))./squeeze(RS_geomean(:,ncase*j-(ncase-k),i)), 'Color', [rval(i) gval bval], 'DisplayName', eqname{i}); hold on;
+                    plot(T_range, convf(1)*squeeze(RSgeomean(:,ncase*j-(ncase-k),i)), 'Color', [rval(i) gval bval], 'DisplayName', eqname{i}); hold on;
                     legend('-DynamicLegend');
                 end
                 grid on; xlabel('Period [s]'); ylabel(strcat('Pseudo-spectral Acceleration [',unitstr(1),']'));
@@ -129,10 +129,10 @@ elseif rsno == 4
             end
             
             
-                RSmean = mean(RSgeomean(:, ncase*j-(ncase-k), :), 3)./mean(RS_geomean(:, ncase*j-(ncase-k), :), 3);
+                RSmean = mean(RSgeomean(:, ncase*j-(ncase-k), :), 3);
                 plot(T_range, squeeze(RSmean), 'k-', 'LineWidth', 2, 'DisplayName', 'Mean');
 
-                RSmax = max(RSgeomean(:, ncase*j-(ncase-k), :), [], 3)./max(RS_geomean(:, ncase*j-(ncase-k), :), [], 3);
+                RSmax = max(RSgeomean(:, ncase*j-(ncase-k), :), [], 3);
                 plot(T_range, squeeze(RSmax), 'r--', 'LineWidth', 2, 'DisplayName', 'Max');
             
 
@@ -166,63 +166,6 @@ if rsno == 1
                 plot(T_range, squeeze(RSmean), 'k-', 'LineWidth', 2, 'DisplayName', 'Mean');
 
                 RSmax = max(RSmajor(:, ncase*j-(ncase-k), :), [], 3);
-                plot(T_range, squeeze(RSmax), 'r--', 'LineWidth', 2, 'DisplayName', 'Max');
-            
-
-        end
-    end
-    
-elseif rsno == 2 || rsno == 3
-    % X-Direction
-    for j = 1:nprofile
-        figure;
-        for k = 1:ncase
-            subplot(p2(1),p2(2),k);
-            % Plot all motions on one figure
-            if any(rs_bool(1:4))
-%                 legendstr = cell(neq, 1);
-                for i = 1:neq
-                    % X-Direction
-                    plot(T_range, squeeze(RS_major(:,ncase*j-(ncase-k),i)), 'Color', [rval(i) gval bval], 'DisplayName', eqname{i}); hold on;
-                    legend('-DynamicLegend');
-                end
-                grid on; xlabel('Period [s]'); ylabel(strcat('Pseudo-spectral Acceleration [',unitstr(1),']'));
-                title(strcat(NDAT{i,j*ncase}.profile,': ',NDAT{i,ncase*j-(ncase-k)}.case,' ','-',' ',str,', X'));
-            end
-            
-            
-                RSmean = mean(RS_major(:, ncase*j-(ncase-k), :), 3);
-                plot(T_range, squeeze(RSmean), 'k-', 'LineWidth', 2, 'DisplayName', 'Mean');
-
-                RSmax = max(RS_major(:, ncase*j-(ncase-k), :), [], 3);
-                plot(T_range, squeeze(RSmax), 'r--', 'LineWidth', 2, 'DisplayName', 'Max');
-            
-
-        end
-    end
-elseif rsno==4
-    % X-Direction
-    for j = 1:nprofile
-        figure;
-        for k = 1:ncase
-            subplot(p2(1),p2(2),k);
-            % Plot all motions on one figure
-            if any(rs_bool(1:4))
-%                 legendstr = cell(neq, 1);
-                for i = 1:neq
-                    % X-Direction
-                    plot(T_range, squeeze(RSmajor(:,ncase*j-(ncase-k),i))./squeeze(RS_major(:,ncase*j-(ncase-k),i)), 'Color', [rval(i) gval bval], 'DisplayName', eqname{i}); hold on;
-                    legend('-DynamicLegend');
-                end
-                grid on; xlabel('Period [s]'); ylabel(strcat('Pseudo-spectral Acceleration [',unitstr(1),']'));
-                title(strcat(NDAT{i,j*ncase}.profile,': ',NDAT{i,ncase*j-(ncase-k)}.case,' ','-',' ',str,', X'));
-            end
-            
-            
-                RSmean = mean(RSmajor(:, ncase*j-(ncase-k), :), 3)./mean(RS_major(:, ncase*j-(ncase-k), :), 3);
-                plot(T_range, squeeze(RSmean), 'k-', 'LineWidth', 2, 'DisplayName', 'Mean');
-
-                RSmax = max(RSmajor(:, ncase*j-(ncase-k), :), [], 3)./max(RS_major(:, ncase*j-(ncase-k), :), [], 3);
                 plot(T_range, squeeze(RSmax), 'r--', 'LineWidth', 2, 'DisplayName', 'Max');
             
 
